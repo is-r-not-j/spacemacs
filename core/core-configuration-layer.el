@@ -456,7 +456,9 @@ If NO-INSTALL is non nil then install steps are skipped."
   ;; configure used packages
   (configuration-layer//configure-packages configuration-layer--used-packages)
   (configuration-layer//load-layers-files configuration-layer--used-layers
-                                          '("keybindings.el")))
+                                          '("keybindings.el"))
+  (configuration-layer//load-layers-files configuration-layer--used-layers
+                                          '("private-keybindings.el")))
 
 (defun configuration-layer/load-auto-layer-file ()
   "Load `auto-layer.el' file"
@@ -1268,7 +1270,9 @@ wether the declared layer is an used one or not."
   "Configure layers with LAYER-NAMES."
   (let ((warning-minimum-level :error))
     (dolist (layer-name layer-names)
-      (configuration-layer//load-layer-files layer-name '("config.el")))))
+      (configuration-layer//load-layer-files layer-name '("config.el"))
+      (configuration-layer//load-layer-files layer-name '("private-config.el"))
+      )))
 
 (defun configuration-layer//declare-used-packages (layers)
   "Declare used packages contained in LAYERS."
