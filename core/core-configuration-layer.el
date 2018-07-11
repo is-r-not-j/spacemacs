@@ -664,7 +664,9 @@ To prevent package from being installed or uninstalled set the variable
   ;; packages configuration above
   (configuration-layer//set-layers-variables configuration-layer--used-layers)
   (configuration-layer//load-layers-files configuration-layer--used-layers
-                        '("keybindings.el"))
+                                          '("keybindings.el"))
+  (configuration-layer//load-layers-files configuration-layer--used-layers
+                                          '("private-keybindings.el"))
   (when (spacemacs-is-dumping-p)
     (dotspacemacs|call-func dotspacemacs/user-load
                             "Calling dotfile user-load...")))
@@ -1619,7 +1621,8 @@ RNAME is the name symbol of another existing layer."
   "Configure layers with LAYER-NAMES."
   (let ((warning-minimum-level :error))
     (dolist (layer-name layer-names)
-      (configuration-layer//load-layer-files layer-name '("config.el")))))
+      (configuration-layer//load-layer-files layer-name '("config.el"))
+      (configuration-layer//load-layer-files layer-name '("private-config.el")))))
 
 (defun configuration-layer//declare-used-packages (layers)
   "Declare used packages contained in LAYERS."
